@@ -81,3 +81,6 @@ ul#nav li a:hover{
 .active{
     background-color: #F27935;
 }
+.activeimage{
+    border: solid 4px #F27935 !important;
+}
