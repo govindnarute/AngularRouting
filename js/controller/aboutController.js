@@ -1,4 +1,5 @@
-myApp.controller('aboutController',function($scope,$rootScope){
+myApp.controller("aboutController",['$scope','$rootScope','$localStorage',function($scope,$rootScope,$localStorage) {
+    
     toastr.options.showMethod = 'slideDown';
 											toastr.options.hideMethod = 'slideUp';
 											toastr.options.closeMethod = 'slideUp';
@@ -26,7 +27,38 @@ myApp.controller('aboutController',function($scope,$rootScope){
                         'img/16.png'
 
                       ];
+    $scope.isImageSelected=function(image){
+        var flag=0
+   angular.forEach($scope.selectedImagesArray, function(value, key) {
+         if(value==image) {
+                flag=1;
+                return flag;
+            }             
+                
+     });     
+        
+            if(flag)
+                return flag;
+            else
+                return flag;
+                        
+    }
     
+    if($localStorage.localSelectedImageArray!=undefined)
+        {
+           
+    $scope.selectedImagesArray=$localStorage.localSelectedImageArray;
+        if($scope.isImageSelected($scope.imageArray[0]))
+            {
+            $scope.ok=false;
+            $scope.cancel=true;    
+            }
+        else
+            {
+                $scope.ok=true;
+            $scope.cancel=false;
+            }    
+            }
     
     $scope.isActive=0;
     $scope.currentImageIndex=0;
@@ -88,7 +120,7 @@ myApp.controller('aboutController',function($scope,$rootScope){
         
         //$scope.imageShow=true;
     }
-    $scope.selectedImagesArray=[];
+    //$scope.selectedImagesArray=[];
     $scope.selectImage=function(image){
         if($scope.isImageSelected(image))
             {
@@ -110,6 +142,7 @@ myApp.controller('aboutController',function($scope,$rootScope){
                 toastr
 					.success("image Added ");
                 $scope.selectedImagesArray.push(image)
+                $localStorage.localSelectedImageArray=$scope.selectedImagesArray;
                 
                 
             }
@@ -120,6 +153,7 @@ myApp.controller('aboutController',function($scope,$rootScope){
     {
                              var index = $scope.selectedImagesArray.indexOf(image);//find the index of player record
 		                     $scope.selectedImagesArray.splice(index,1)
+                             $localStorage.localSelectedImageArray=$scope.selectedImagesArray;
                              toastr.remove();
         
                              toastr
@@ -138,6 +172,7 @@ myApp.controller('aboutController',function($scope,$rootScope){
                    toastr.remove();             
                 toastr.success("image Added");
                 $scope.selectedImagesArray.push(image)
+                $localStorage.localSelectedImageArray=$scope.selectedImagesArray;
                 
             }
             
@@ -146,22 +181,7 @@ myApp.controller('aboutController',function($scope,$rootScope){
         
         
     }
-    $scope.isImageSelected=function(image){
-        var flag=0
-   angular.forEach($scope.selectedImagesArray, function(value, key) {
-         if(value==image) {
-                flag=1;
-                return flag;
-            }             
-                
-     });     
-        
-            if(flag)
-                return flag;
-            else
-                return flag;
-                        
-    }
+    
         
     
-})
+}])

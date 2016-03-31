@@ -106,3 +106,12 @@ width: 150px;
     margin-left: 50px;
 }
 
+.line-separator{
+
+height:1px;
+
+background:#717171;
+
+border-bottom:1px solid white;
+
+}
