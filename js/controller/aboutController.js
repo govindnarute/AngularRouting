@@ -71,6 +71,17 @@ myApp.controller('aboutController',function($scope,$rootScope){
     }
         $scope.imagePath=$scope.imageArray[0];
     $scope.setImage=function(image,index){
+        if($scope.isImageSelected(image))
+            {
+                
+            $scope.ok=false;
+            $scope.cancel=true;    
+            }
+        else
+            {
+            $scope.ok=true;
+            $scope.cancel=false;
+            }
         $scope.imagePath=image;
         $scope.currentImageIndex=index;
         $scope.isActive=index;
