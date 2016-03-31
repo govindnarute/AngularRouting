@@ -6,18 +6,31 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3" >
-              <div class="scrollme" ng-scrollbar style="height:600; overflow-y:scroll;"  >
+              <div style="height:600; overflow-y:scroll;"  >
             <span ng-repeat="image in imageArray"  >
               
-                <img src="{{image}}"  height="90px" width="90px" ng-class="activeimage:isActive==$index" ng-click="setImage(image,$index)" style="margin-bottom:10px;border:solid 2px;"/>
+                <img src="{{image}}"  height="90px" width="90px"ng-click="setImage(image,$index)" style="margin-bottom:10px;border:solid 2px;"/>
                 
               </span>
                   </div>
             </div>
               
-            <div class="col-md-8">
+            <div class="col-md-8" id="imagedisplay">
                 <input type="button" class="btn btn-primary" value="PRE" ng-click="showPreviousImage()" style="position:absolute;margin-top:300px;"/>
                 <input type="button" class="btn btn-primary" value="Next" ng-click="showNextImage();" style="position:absolute;margin-top:300px;margin-left:640px;" />
+                
+                <span  id="selectspan"style="position:absolute;margin-top:500px;margin-left:290px;"> 
+                    <a href ng-click="selectImage(imagePath)" class="btn btn-info btn-lg mt20 ml50" ng-show="ok">
+          <span class="glyphicon glyphicon-ok"></span>
+        </a>
+                    <a href ng-click="selectImage(imagePath)"class="btn btn-info btn-lg mt20 ml50" ng-show="cancel">
+          <span class="glyphicon glyphicon-remove"></span>  
+        </a>
+<!--
+                <input type="button" class="glyphicon glyphicon-ok mt20 ml10" value="select" ng-click="showNextImage();"  />
+                <input type="button" class="glyphicon glyphicon-ok mt20 ml10" value="deselect" ng-click="showNextImage();"  />
+-->
+                </span>
             <img src={{imagePath}}  height="600px" width="700px" ng-dblclick="selectImage(imagePath)" style="margin-bottom:10px;border:solid 2px;">
             
             

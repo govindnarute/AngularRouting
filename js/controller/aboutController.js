@@ -4,7 +4,8 @@ myApp.controller('aboutController',function($scope,$rootScope){
 											toastr.options.closeMethod = 'slideUp';
     
     $rootScope.headerName="About"
-    
+    $scope.ok=true;
+    $scope.cancel=false;
     //$scope.imageShow=false;
     $scope.imageArray=[
                     'img/1.jpg',
@@ -25,11 +26,24 @@ myApp.controller('aboutController',function($scope,$rootScope){
                         'img/16.png'
 
                       ];
+    
+    
     $scope.isActive=0;
     $scope.currentImageIndex=0;
     $scope.showPreviousImage=function(){
         console.log($scope.currentImageIndex)
         console.log($scope.imageArray.length)
+        if($scope.currentImageIndex!=0)
+        if($scope.isImageSelected($scope.imageArray[$scope.currentImageIndex-1]))
+            {
+            $scope.ok=false;
+            $scope.cancel=true;    
+            }
+        else
+            {
+                $scope.ok=true;
+            $scope.cancel=false;
+            }
         if($scope.currentImageIndex!=0){
         $scope.imagePath=$scope.imageArray[$scope.currentImageIndex-1];
         $scope.currentImageIndex=$scope.currentImageIndex-1;
@@ -39,6 +53,16 @@ myApp.controller('aboutController',function($scope,$rootScope){
     $scope.showNextImage=function(){
         console.log($scope.currentImageIndex)
         console.log($scope.imageArray.length)
+        if($scope.isImageSelected($scope.imageArray[$scope.currentImageIndex+1]))
+            {
+            $scope.ok=false;
+            $scope.cancel=true;    
+            }
+        else
+            {
+                $scope.ok=true;
+            $scope.cancel=false;
+            }
         if($scope.currentImageIndex+1!=$scope.imageArray.length)
             {
         $scope.imagePath=$scope.imageArray[$scope.currentImageIndex+1];
@@ -55,13 +79,28 @@ myApp.controller('aboutController',function($scope,$rootScope){
     }
     $scope.selectedImagesArray=[];
     $scope.selectImage=function(image){
+        if($scope.isImageSelected(image))
+            {
+                
+            $scope.ok=false;
+            $scope.cancel=true;    
+            }
+        else
+            {
+            $scope.ok=true;
+            $scope.cancel=false;
+            }
         $scope.flag=1;
         if($scope.selectedImagesArray.length==0)
             {
+                $scope.ok=false;
+            $scope.cancel=true;
                 toastr.remove();    
                 toastr
 					.success("image Added ");
                 $scope.selectedImagesArray.push(image)
+                
+                
             }
         
         else{
@@ -76,20 +115,41 @@ myApp.controller('aboutController',function($scope,$rootScope){
 					.info("image Removed");
                             // alert('image Removed'+index)
                              $scope.flag=0
+                             $scope.ok=true;
+            $scope.cancel=false;
                              
      }               
                 
 });          if($scope.flag)
             {
+                $scope.ok=false;
+            $scope.cancel=true;
                    toastr.remove();             
                 toastr.success("image Added");
                 $scope.selectedImagesArray.push(image)
+                
             }
             
         }
         
         
         
+    }
+    $scope.isImageSelected=function(image){
+        var flag=0
+   angular.forEach($scope.selectedImagesArray, function(value, key) {
+         if(value==image) {
+                flag=1;
+                return flag;
+            }             
+                
+     });     
+        
+            if(flag)
+                return flag;
+            else
+                return flag;
+                        
     }
         
     

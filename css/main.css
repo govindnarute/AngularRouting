@@ -84,3 +84,25 @@ ul#nav li a:hover{
 .activeimage{
     border: solid 4px #F27935 !important;
 }
+#selectspan{
+display: none;
+    
+}
+
+#imagedisplay:hover #selectspan{
+   
+   display: block;
+background-color: darkgrey;
+height: 80px;    
+width: 150px;    
+ 
+    
+}
+
+.mt20{
+  margin-top: 20px;  
+}
+.ml50{
+    margin-left: 50px;
+}
+
